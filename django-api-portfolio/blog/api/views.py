@@ -1,21 +1,23 @@
-from rest_framework.viewsets import ModelViewSet
-from blog.models import Category, Comment, BlogPost, BlogImage
-from .serializers import CategorySerializer, CommentSerializer, BlogPostSerializer, BlogImageSerializer
-from rest_framework.decorators import api_view, authentication_classes
-from rest_framework.authentication import BasicAuthentication
+from rest_framework import viewsets
+from blog.models import Author, Category, BlogPost, PostImage, Comment
+from blog.api.serializers import AuthorSerializer, CategorySerializer, BlogPostSerializer, PostImageSerializer, CommentSerializer
 
-class CategoryViewSet(ModelViewSet):
+class AuthorViewSet(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+
+class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-class CommentViewSet(ModelViewSet):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-
-class BlogPostViewSet(ModelViewSet):
+class BlogPostViewSet(viewsets.ModelViewSet):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
 
-class BlogImageViewSet(ModelViewSet):
-    queryset = BlogImage.objects.all()
-    serializer_class = BlogImageSerializer
+class PostImageViewSet(viewsets.ModelViewSet):
+    queryset = PostImage.objects.all()
+    serializer_class = PostImageSerializer
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer

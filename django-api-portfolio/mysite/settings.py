@@ -79,12 +79,10 @@ REST_FRAMEWORK = {
     ],
 }
 CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:7517',
-    'http://172.17.1.218:7517',
-    'https://www.queb.online',
-    "https://antonio-queb.up.railway.app",
-    "http://10.31.1.74:8000",
+    'https://192.168.1.65:8088',
+    
 ]
+
 
 ROOT_URLCONF = 'mysite.urls'
 DISABLE_COLLECTSTATIC = 0
@@ -161,11 +159,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
+
+MEDIA_URL = 'http://192.168.1.65:8088/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-
-MEDIA_URL='/media/'
-MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
-
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

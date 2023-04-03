@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     postgresql-client \
     python3-dev \
     libffi-dev \
+    netcat \
     && rm -rf /var/lib/apt/lists/* \
     && pip install --upgrade pip \
     && apt-get clean
@@ -31,4 +32,10 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 # Copiamos el código fuente de nuestra aplicación al directorio de trabajo en la imagen de Docker
-COPY . /backend
+COPY . /backend/
+
+# Copiamos y configuramos el archivo entrypoint.sh
+COPY entrypoint.sh /backend/
+RUN chmod +x /backend/entrypoint.sh
+
+ENTRYPOINT ["/backend/entrypoint.sh"]

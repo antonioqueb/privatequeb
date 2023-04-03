@@ -1,9 +1,15 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import CategoryViewSet, CommentViewSet, BlogPostViewSet, BlogImageViewSet
+from rest_framework import routers
+from blog.api.views import AuthorViewSet, CategoryViewSet, BlogPostViewSet, PostImageViewSet, CommentViewSet
 
-router = DefaultRouter()
-router.register(r'category', CategoryViewSet, basename='category')
+router = routers.DefaultRouter()
+
+router.register(r'authors', AuthorViewSet)
+router.register(r'categories', CategoryViewSet)
+router.register(r'posts', BlogPostViewSet)
+router.register(r'post-images', PostImageViewSet)
 router.register(r'comments', CommentViewSet)
-router.register(r'blogposts', BlogPostViewSet)
-router.register(r'blogimages', BlogImageViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]

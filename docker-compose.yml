@@ -7,26 +7,33 @@ services:
       - static_volume:/usr/src/app/static
       - media_volume:/usr/src/app/media
     ports:
-      - 8088:80
+      - "8088:8088" # Se expone el puerto 8088 del host al puerto 8088 del contenedor
     depends_on:
       - web
-
 
   web:
     build: 
       context: ./django-api-portfolio
-    command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
     ports:
-      - 8000:8000
-    working_dir: /usr/src/app/
+      - "8000:8000" # Se expone el puerto 8000 del host al puerto 8000 del contenedor
+    working_dir: /backend/
     volumes:
-      - ./django-api-portfolio:/usr/src/app
-      - static_volume:/usr/src/app/static
-      - media_volume:/usr/src/app/media
+      - ./django-api-portfolio:/backend
+      - static_volume:/backend/static
+      - media_volume:/backend/media
     expose:
       - 8000
     depends_on:
       - postgres
+
+  portfolio-app:
+    build:
+      context: ./portfolio-app/
+    depends_on:
+      - web
+    ports:
+      - "3001:3000"
+
 
   postgres:
     image: postgres:15.2
@@ -37,7 +44,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     ports:
-      - 5432:5432
+      - "5432:5432" # Se expone el puerto 5432 del host al puerto 5432 del contenedor
 
 volumes:
   postgres:

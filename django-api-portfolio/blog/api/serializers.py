@@ -1,31 +1,38 @@
 from rest_framework import serializers
-from blog.models import Category, Comment, BlogPost, BlogImage
+from blog.models import Author, Category, BlogPost, PostImage, Comment
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = '__all__'
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'name', 'description', 'blogposts']
-        # incluye los BlogPost relacionados en la respuesta
-        depth = 1
+        fields = '__all__'
+
+
+class PostImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PostImage
+        fields = ('id', 'image')
+
 
 class CommentSerializer(serializers.ModelSerializer):
+    replies = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
     class Meta:
         model = Comment
-        fields = ['id', 'content', 'author', 'blogpost']
-        # incluye el BlogPost relacionado en la respuesta
-        depth = 1
+        fields = ('id', 'post', 'name', 'email', 'content', 'date_posted', 'parent', 'replies')
+
 
 class BlogPostSerializer(serializers.ModelSerializer):
+    images = PostImageSerializer(many=True, read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
-    category = CategorySerializer(read_only=True)
+    author = AuthorSerializer(read_only=True)
 
     class Meta:
         model = BlogPost
-        fields = ['id', 'title', 'content', 'pub_date', 'category', 'comments']
-
-class BlogImageSerializer(serializers.ModelSerializer):
-    blogpost = BlogPostSerializer(read_only=True)
-
-    class Meta:
-        model = BlogImage
-        fields = ['id', 'image', 'description', 'blogpost']
+        fields = ('id', 'title', 'content', 'category', 'image', 'date_posted', 'author', 'images', 'comments')
