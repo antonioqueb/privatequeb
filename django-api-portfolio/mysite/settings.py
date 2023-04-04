@@ -164,7 +164,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
-MEDIA_URL = 'http://192.168.1.65:8088/media/'
+MEDIA_URL = 'http://20.77.66.228:8088/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'

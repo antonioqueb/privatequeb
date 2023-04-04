@@ -10,6 +10,8 @@ services:
       - "8088:8088" # Se expone el puerto 8088 del host al puerto 8088 del contenedor
     depends_on:
       - web
+    networks:
+      - nginx-proxy-manager-net
 
   web:
     build: 
@@ -25,6 +27,8 @@ services:
       - 8000
     depends_on:
       - postgres
+    networks:
+      - nginx-proxy-manager-net
 
   portfolio-app:
     build:
@@ -32,8 +36,9 @@ services:
     depends_on:
       - web
     ports:
-      - "3001:3000"
-
+      - "80:3000"
+    networks:
+      - nginx-proxy-manager-net
 
   postgres:
     image: postgres:15.2
@@ -45,6 +50,28 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5432:5432" # Se expone el puerto 5432 del host al puerto 5432 del contenedor
+    networks:
+      - nginx-proxy-manager-net
+
+  nginx-proxy-manager:
+    image: jlesage/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    restart: always
+    volumes:
+      - ./nginx-proxy-manager/data:/config # Configuración
+      - ./nginx-proxy-manager/letsencrypt:/etc/letsencrypt # Certificados Let's Encrypt
+      - ./nginx-proxy-manager/nginx:/etc/nginx/user.d # Archivos de configuración de Nginx
+      - /var/run/docker.sock:/var/run/docker.sock # Socket Docker
+    ports:
+      - "81:81" # Webapp
+      - "443:443" # Servicio HTTPS
+      - "444:444" # Servicio HTTP
+    networks:
+      - nginx-proxy-manager-net
+
+networks:
+  nginx-proxy-manager-net:
+    driver: bridge
 
 volumes:
   postgres:
