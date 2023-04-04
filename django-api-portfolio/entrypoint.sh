@@ -20,7 +20,7 @@ python manage.py makemigrations contact --noinput
 python manage.py makemigrations skill --noinput
 python manage.py migrate blog --noinput
 python manage.py migrate
-
+ 
 
 # Inicia Gunicorn
 echo "Iniciando servidor Gunicorn..."
