@@ -79,7 +79,7 @@ REST_FRAMEWORK = {
     ],
 }
 CORS_ALLOWED_ORIGINS = [
-    'https://192.168.1.65:8088',
+    'https://20.77.66.228:8088',
     
 ]
 

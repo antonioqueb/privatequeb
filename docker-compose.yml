@@ -54,20 +54,15 @@ services:
       - nginx-proxy-manager-net
 
   nginx-proxy-manager:
-    image: jlesage/nginx-proxy-manager:latest
-    container_name: nginx-proxy-manager
-    restart: always
-    volumes:
-      - ./nginx-proxy-manager/data:/config # Configuración
-      - ./nginx-proxy-manager/letsencrypt:/etc/letsencrypt # Certificados Let's Encrypt
-      - ./nginx-proxy-manager/nginx:/etc/nginx/user.d # Archivos de configuración de Nginx
-      - /var/run/docker.sock:/var/run/docker.sock # Socket Docker
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
     ports:
-      - "81:81" # Webapp
-      - "443:443" # Servicio HTTPS
-      - "444:444" # Servicio HTTP
-    networks:
-      - nginx-proxy-manager-net
+      - '82:82'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
 
 networks:
   nginx-proxy-manager-net:
