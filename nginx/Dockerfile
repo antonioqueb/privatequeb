@@ -1,6 +1,6 @@
 FROM nginx:1.22.0-alpine
 
-RUN chmod +x /start.sh
+
 
 # Elimina el archivo de configuración predeterminado
 RUN rm /etc/nginx/conf.d/default.conf
