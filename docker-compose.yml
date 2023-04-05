@@ -22,7 +22,7 @@ services:
       - letsencrypt:/etc/letsencrypt
       - certbot-etc:/etc/certbot
       - certbot-var-www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot certonly --webroot --preferred-challenges http-01 --webroot-path=/var/www/certbot -d queb.online --email tu_correo@ejemplo.com --agree-tos --no-eff-email --force-renewal; sleep 12h & wait $${!}; done;'"
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot certonly --webroot --preferred-challenges http-01 --webroot-path=/var/www/certbot -d queb.online --email antonioquebcastillo@gmail.com --agree-tos --no-eff-email --force-renewal; sleep 12h & wait $${!}; done;'"
 
   web:
     build: 
