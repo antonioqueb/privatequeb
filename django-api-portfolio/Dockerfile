@@ -4,6 +4,8 @@ FROM python:3.9-slim-buster
 # Establecemos la variable de entorno PYTHONUNBUFFERED para asegurar que la salida de Python se muestre de inmediato en la consola
 ENV PYTHONUNBUFFERED 1
 
+RUN chmod +x /django-api-portfolio/entrypoint.sh
+
 # Definimos el directorio de trabajo en la imagen de Docker
 # Todas las instrucciones posteriores se ejecutarán en este directorio
 WORKDIR /backend
