@@ -1,32 +1,19 @@
 version: '3.9'
 
 services:
-  nginx:
-    build: ./nginx
-    volumes:
-      - static_volume:/usr/src/app/static
-      - media_volume:/usr/src/app/media
-      - letsencrypt:/etc/letsencrypt
-      - certbot-etc:/etc/certbot
-      - certbot-var-www:/var/www/certbot
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - web
-      - certbot
-
-  certbot:
-    image: certbot/certbot
+      - '80:80'
+      - '81:81'
+      - '443:443'
     volumes:
-      - letsencrypt:/etc/letsencrypt
-      - certbot-etc:/etc/certbot
-      - certbot-var-www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot certonly --webroot --preferred-challenges http-01 --webroot-path=/var/www/certbot -d queb.online --email antonioquebcastillo@gmail.com --agree-tos --no-eff-email --force-renewal; sleep 12h & wait $${!}; done;'"
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
 
   web:
-    build: 
-      context: ./django-api-portfolio
+    build: ./django-api-portfolio
     working_dir: /backend/
     volumes:
       - ./django-api-portfolio:/backend
@@ -34,16 +21,22 @@ services:
       - media_volume:/backend/media
     expose:
       - 8000
+    environment:
+      - VIRTUAL_HOST=queb.online
+      - VIRTUAL_PORT=8000
     depends_on:
       - postgres
 
   portfolio-app:
     build:
       context: ./portfolio-app/
-    depends_on:
-      - web
     expose:
       - 3000
+    environment:
+      - VIRTUAL_HOST=queb.online
+      - VIRTUAL_PORT=3000
+    depends_on:
+      - web
 
   postgres:
     image: postgres:15.2
@@ -53,13 +46,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
-    ports:
-      - "5432:5432"
 
 volumes:
   postgres:
   static_volume:
   media_volume:
-  letsencrypt:
-  certbot-etc:
-  certbot-var-www:
