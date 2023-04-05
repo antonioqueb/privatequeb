@@ -19,19 +19,16 @@ services:
       - ./django-api-portfolio:/backend
       - static_volume:/backend/static
       - media_volume:/backend/media
-    expose:
-      - 8000
-    environment:
-      - VIRTUAL_HOST=queb.online
-      - VIRTUAL_PORT=8000
+    ports:
+      - "8000:8000"
     depends_on:
       - postgres
 
   portfolio-app:
     build:
       context: ./portfolio-app/
-    expose:
-      - 3000
+    ports:
+     - "3000:3000"
     environment:
       - VIRTUAL_HOST=queb.online
       - VIRTUAL_PORT=3000
