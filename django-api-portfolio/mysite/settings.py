@@ -79,10 +79,10 @@ REST_FRAMEWORK = {
     ],
 }
 CORS_ALLOWED_ORIGINS = [
-    'https://www.queb.online/',
-    'https://queb.online/'
-    
+    "https://queb.online",
+    "https://www.queb.online",
 ]
+
 
 
 ROOT_URLCONF = 'mysite.urls'
