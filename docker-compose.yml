@@ -34,6 +34,7 @@ services:
     image: nginx:latest
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
+      - media_volume:/usr/src/app/media/  # Añade esta línea
     ports:
       - "80:80"
     depends_on:
