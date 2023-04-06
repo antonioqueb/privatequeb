@@ -37,6 +37,7 @@ COPY . /backend/
 
 # Copiamos y configuramos el archivo entrypoint.sh
 COPY entrypoint.sh /backend/
+
 RUN chmod +x /backend/entrypoint.sh
 
 ENTRYPOINT ["/backend/entrypoint.sh"]

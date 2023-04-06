@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['queb.online', 'www.queb.online']
 
 # FORM SUBMISSION
 # Comment out the following line and place your railway URL, and your production URL in the array.
@@ -79,7 +79,8 @@ REST_FRAMEWORK = {
     ],
 }
 CORS_ALLOWED_ORIGINS = [
-    'https://20.77.66.228:8088',
+    'https://www.queb.online/',
+    'https://queb.online/'
     
 ]
 
@@ -164,7 +165,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
-MEDIA_URL = 'http://20.77.66.228:8088/media/'
+MEDIA_URL = 'https://www.queb.online/api/media'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
