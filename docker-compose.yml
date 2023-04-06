@@ -29,9 +29,6 @@ services:
       context: ./portfolio-app/
     ports:
      - "3000:3000"
-    environment:
-      - VIRTUAL_HOST=queb.online
-      - VIRTUAL_PORT=3000
     depends_on:
       - web
 
