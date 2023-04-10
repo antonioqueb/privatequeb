@@ -50,7 +50,7 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - media_volume:/usr/src/app/media/
-      - ./cash-converter/dist/:/cash-converter-dist/
+      - ./cash-converter/dist/:/cash-converter-dist/ 
     ports:
       - "80:80"
     depends_on:
