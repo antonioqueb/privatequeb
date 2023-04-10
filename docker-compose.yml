@@ -1,6 +1,13 @@
 version: '3.9'
 
 services:
+  cc:
+    build: ./cash-converter
+    ports:
+     - "7001:3000"
+
+
+
   cv:
     build: ./app-pdf-viewer
     working_dir: /cv/
