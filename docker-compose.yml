@@ -1,6 +1,13 @@
 version: '3.9'
 
 services:
+  cv:
+    build: ./app-pdf-viewer
+    working_dir: /cv/
+    ports:
+      - "7000:7000"
+
+
   web:
     build: ./django-api-portfolio
     working_dir: /backend/
