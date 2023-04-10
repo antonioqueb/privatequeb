@@ -1,8 +1,9 @@
 version: '3.9'
 
 services:
-  cc:
-    build: ./cash-converter
+  cashconverter:
+    build: 
+      context: ./cash-converter
     ports:
      - "7001:3000"
 
