@@ -49,7 +49,8 @@ services:
     image: nginx:latest
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - media_volume:/usr/src/app/media/  # Añade esta línea
+      - media_volume:/usr/src/app/media/
+      - ./cash-converter/dist/:/cash-converter-dist/
     ports:
       - "80:80"
     depends_on:
