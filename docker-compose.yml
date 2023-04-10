@@ -5,7 +5,7 @@ services:
     build: 
       context: ./cash-converter
     ports:
-     - "7001:3001"
+     - "7001:7001"
 
 
 
