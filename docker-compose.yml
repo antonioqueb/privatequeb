@@ -50,7 +50,8 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - media_volume:/usr/src/app/media/
-      - ./cash-converter/dist/:/cash-converter-dist/ 
+      - cashconverter_static_volume:/cash-converter-dist/
+
     ports:
       - "80:80"
     depends_on:
@@ -61,3 +62,4 @@ volumes:
   postgres:
   static_volume:
   media_volume:
+  cashconverter_static_volume:
