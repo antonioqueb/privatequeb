@@ -4,6 +4,7 @@ services:
   cashconverter:
     build: 
       context: ./cash-converter
+    working_dir: /appcash/
     ports:
      - "7001:7001"
 
