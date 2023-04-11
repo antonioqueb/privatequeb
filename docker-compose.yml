@@ -8,7 +8,7 @@ services:
     ports:
      - "7001:7001"
     volumes:
-      - cashconverter_dist:/appcash/dist
+      - cashconverter_static_volume:/appcash/dist/assets
 
 
 
@@ -53,7 +53,7 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - media_volume:/usr/src/app/media/
-      - cashconverter_dist:/cash-converter-dist
+      - cashconverter_static_volume:/cash-converter-dist/assets/
 
     ports:
       - "80:80"
@@ -65,4 +65,4 @@ volumes:
   postgres:
   static_volume:
   media_volume:
-  cashconverter_dist:
+   cashconverter_static_volume:
