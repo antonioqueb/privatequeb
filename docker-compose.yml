@@ -1,14 +1,7 @@
 version: '3.9'
 
 services:
-  cashconverter:
-    build: 
-      context: ./cash-converter
-    working_dir: /appcash/
-    ports:
-     - "7001:7001"
-    volumes:
-      - cashconverter_static_volume:/appcash/dist/assets
+
 
 
 
@@ -53,7 +46,7 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - media_volume:/usr/src/app/media/
-      - cashconverter_static_volume:/cash-converter-dist/assets/
+      
 
     ports:
       - "80:80"
@@ -65,4 +58,4 @@ volumes:
   postgres:
   static_volume:
   media_volume:
-  cashconverter_static_volume:
+
