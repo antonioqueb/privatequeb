@@ -7,6 +7,8 @@ services:
     working_dir: /appcash/
     ports:
      - "7001:7001"
+    volumes:
+      - cashconverter_dist:/appcash/dist
 
 
 
@@ -51,7 +53,7 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - media_volume:/usr/src/app/media/
-      - cashconverter_static_volume:/cash-converter-dist/
+      - cashconverter_dist:/cash-converter-dist
 
     ports:
       - "80:80"
@@ -63,4 +65,4 @@ volumes:
   postgres:
   static_volume:
   media_volume:
-  cashconverter_static_volume:
+  cashconverter_dist:
