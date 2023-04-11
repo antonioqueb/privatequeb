@@ -65,4 +65,4 @@ volumes:
   postgres:
   static_volume:
   media_volume:
-   cashconverter_static_volume:
+  cashconverter_static_volume:
